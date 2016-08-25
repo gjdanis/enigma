@@ -78,19 +78,6 @@ class Rotor:
         x = self.encipher(x) if right else self.decipher(x)
         return self.alphabet.index(x)
 
-    @staticmethod
-    def create():
-        """
-        Factory method to create a Rotor with random initial settings
-
-        Returns: Rotor
-        """
-        
-        tmp = list(ALPHABET)
-        random.shuffle(tmp)
-        return Rotor(''.join(tmp))
-
-
 class Reflector:
     """
     Models a 'reflector' in the Enigma machine. Reflector("CDAB")
@@ -117,25 +104,6 @@ class Reflector:
         Returns: char
         """
         return self.mappings[character]
-
-    @staticmethod
-    def create():
-        """
-        Factory method to create a Reflector with random mappings
-
-        Returns: Reflector
-        """
-
-        tmp = list(ALPHABET)
-        mappings = {}
-        while tmp:
-            x, y = random.sample(tmp, 2)
-            tmp.remove(x)
-            tmp.remove(y)
-            mappings[x] = y
-            mappings[y] = x
-        return Reflector(''.join(mappings[x] for x in ALPHABET))
-
 
 class Machine:
     """
