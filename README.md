@@ -7,8 +7,7 @@ An Enigma machine simulator written in python. Example of use:
 >>> r3 = Rotor("DJYPKQNOZLMGIHFETRVCBXSWAU", 3)
 >>> reflector = Reflector("EJMZALYXVBWFCRQUONTSPIKHGD")
 >>> machine = Machine([r1, r2, r3], reflector)
->>> x = machine.encipher("ATTACK AT DAWN")
->>> x
+>>> machine.encipher("ATTACK AT DAWN")
 'TFKZAX KV LCBG'
 >>> machine.decipher('TFKZAX KV LCBG')
 'ATTACK AT DAWN'
