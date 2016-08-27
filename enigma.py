@@ -27,6 +27,7 @@ class Rotor:
 
         Returns: void
         """
+
         self.alphabet = ALPHABET
         self.rotate(self.initial_offset)
         self.rotations = 1
@@ -39,6 +40,7 @@ class Rotor:
 
         Returns: void
         """
+
         self.alphabet = self.alphabet[offset:] + self.alphabet[:offset]
         self.rotations = offset
 
@@ -71,6 +73,7 @@ class Rotor:
 
         Returns: int
         """
+
         x = self.alphabet[contact_index]
         x = self.encipher(x) if right else self.decipher(x)
         return self.alphabet.index(x)
@@ -115,6 +118,16 @@ class Machine:
         self.rotors = rotors
         self.reflector = reflector
 
+    def reset(self):
+        """
+        Resets the machine's rotors
+
+        Returns: void
+        """
+
+        for rotor in self.rotors:
+            rotor.reset()
+
     def encipher(self, text):
         """
         Encipher the given input
@@ -134,8 +147,7 @@ class Machine:
         Returns: string
         """
 
-        for rotor in self.rotors:
-            rotor.reset()
+        self.reset()
         return self.encipher(text)
 
     def encipher_character(self, x):
