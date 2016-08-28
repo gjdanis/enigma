@@ -27,7 +27,6 @@ class Rotor:
 
         Returns: void
         """
-
         self.alphabet = ALPHABET
         self.rotate(self.initial_offset)
         self.rotations = 1
@@ -40,7 +39,6 @@ class Rotor:
 
         Returns: void
         """
-
         self.alphabet = self.alphabet[offset:] + self.alphabet[:offset]
         self.rotations = offset
 
@@ -73,7 +71,6 @@ class Rotor:
 
         Returns: int
         """
-
         x = self.alphabet[contact_index]
         x = self.encipher(x) if right else self.decipher(x)
         return self.alphabet.index(x)
@@ -90,8 +87,7 @@ class Reflector:
     def __init__(self, mappings):
         self.mappings = dict(zip(ALPHABET, mappings))
 
-        for x in self.mappings:
-            y = self.mappings[x]
+        for x, y in self.mappings.items():
             if x != self.mappings[y]:
                 raise ValueError('Mapping for {0} and {1} is invalid'.format(x, y))
 
@@ -124,7 +120,6 @@ class Machine:
 
         Returns: void
         """
-
         for rotor in self.rotors:
             rotor.reset()
 
@@ -146,7 +141,6 @@ class Machine:
 
         Returns: string
         """
-
         self.reset()
         return self.encipher(text)
 
