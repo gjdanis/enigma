@@ -1,4 +1,3 @@
-import random
 import string
 
 ALPHABET = string.ascii_uppercase
@@ -162,7 +161,7 @@ class Machine:
         5. Return the character at the terminating contact position as the input
            character's enciphering
 
-        Args: x (char) the character to encode
+        Args: x (char) the character to encipher
 
         Returns: char
         """
