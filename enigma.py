@@ -67,7 +67,9 @@ class Rotor:
         Translate contact with the rotor to the right or left. Return
         the resulting point of contact
 
-        Args: right (bool) direction to move the contact over the rotor
+        Args:
+            contact_index (int) point of contact with the rotor
+            right (bool) direction to move the contact over the rotor
 
         Returns: int
         """
@@ -91,15 +93,17 @@ class Reflector:
             if x != self.mappings[y]:
                 raise ValueError('Mapping for {0} and {1} is invalid'.format(x, y))
 
-    def __getitem__(self, character):
+    def translate(self, contact_index):
         """
-        Returns the reflection of the input character
+        Translate contact with the reflector. Return
+        the resulting point of contact
 
-        Args: character (char)
+        Args: contact_index (int) point of contact with the rotor
 
-        Returns: char
+        Returns: int
         """
-        return self.mappings[character]
+        x = self.mappings[ALPHABET[contact_index]]
+        return ALPHABET.index(x)
 
 class Machine:
     """
@@ -171,8 +175,7 @@ class Machine:
         for rotor in self.rotors:
             contact_index = rotor.translate(contact_index)
 
-        x = self.reflector[ALPHABET[contact_index]]
-        contact_index = ALPHABET.index(x)
+        contact_index = self.reflector.translate(contact_index)
 
         for rotor in reversed(self.rotors):
             contact_index = rotor.translate(contact_index, False)
