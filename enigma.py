@@ -29,9 +29,9 @@ class Rotor:
 
         Returns: void
         """
+        self.rotations = 0
         self.alphabet = ALPHABET
         self.rotate(self.initial_offset)
-        self.rotations = 0
 
     def rotate(self, num_rotations=1):
         """
