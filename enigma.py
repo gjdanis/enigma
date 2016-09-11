@@ -3,6 +3,8 @@ import string
 ALPHABET = string.ascii_uppercase
 
 class Rotor:
+    TURN_FREQUENCY = len(ALPHABET)
+    
     """
     Models a 'rotor' in an Enigma machine
 
@@ -16,6 +18,7 @@ class Rotor:
 
     def __init__(self, mappings, offset=0):
         self.initial_offset = offset
+        self.rotations = 0
         self.reset()
         self.forward_mappings = dict(zip(self.alphabet, mappings))
         self.reverse_mappings = dict(zip(mappings, self.alphabet))
@@ -28,18 +31,19 @@ class Rotor:
         """
         self.alphabet = ALPHABET
         self.rotate(self.initial_offset)
-        self.rotations = 1
+        self.rotations = 0
 
-    def rotate(self, offset=1):
+    def rotate(self, num_rotations=1):
         """
         Rotates the rotor the given number of characters
 
-        Args: offset (int) how many turns to make
+        Args: num_rotations (int) how many turns to make
 
-        Returns: void
+        Returns: int
         """
-        self.alphabet = self.alphabet[offset:] + self.alphabet[:offset]
-        self.rotations = offset
+        self.alphabet = self.alphabet[num_rotations:] + self.alphabet[:num_rotations]
+        self.rotations += num_rotations
+        return self.rotations
 
     def encipher(self, character):
         """
@@ -179,12 +183,9 @@ class Machine:
         for rotor in reversed(self.rotors):
             contact_index = rotor.translate(contact_index, False)
 
-        self.rotors[0].rotate()
-        for index in range(1, len(self.rotors)):
-            rotor = self.rotors[index]
-            turn_frequency = len(ALPHABET)*index
-            if self.rotors[index-1].rotations % turn_frequency == 0:
-                rotor.rotate()
+        for rotor in self.rotors:
+            if rotor.rotate() % Rotor.TURN_FREQUENCY != 0:
+                break
 
         return ALPHABET[contact_index]
 
