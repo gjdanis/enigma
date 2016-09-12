@@ -37,7 +37,7 @@ class Rotor:
         """
         Rotates the rotor the given number of characters
 
-        Args: num_rotations (int) how many turns to make
+        Args: num_rotations (int)
 
         Returns: int
         """
@@ -134,7 +134,7 @@ class Machine:
         """
         Encipher the given input
 
-        Args: text (string) plain text to encode
+        Args: text (string)
 
         Returns: string
         """
@@ -144,7 +144,7 @@ class Machine:
         """
         Deccipher the given input
 
-        Args: text (string) cipher text to decode
+        Args: text (string)
 
         Returns: string
         """
