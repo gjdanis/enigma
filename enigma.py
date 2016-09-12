@@ -18,7 +18,6 @@ class Rotor:
 
     def __init__(self, mappings, offset=0):
         self.initial_offset = offset
-        self.rotations = 0
         self.reset()
         self.forward_mappings = dict(zip(self.alphabet, mappings))
         self.reverse_mappings = dict(zip(mappings, self.alphabet))
